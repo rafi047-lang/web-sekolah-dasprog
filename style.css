@@ -1,0 +1,879 @@
+/* ========== RESET & GLOBAL STYLES ========== */
+/* Reset semua margin, padding, dan mengatur box-sizing agar padding/border tidak mempengaruhi lebar elemen */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; /* Font utama yang modern */
+}
+
+/* Style body halaman - warna latar putih krem, teks gelap, sembunyikan overflow horizontal */
+body {
+    background-color: #fefefe;
+    color: #1f2937;
+    overflow-x: hidden;
+}
+
+/* ========== SCROLL BEHAVIOR ========== */
+/* Membuat scroll antar anchor link menjadi halus, dengan offset 80px dari atas (menghindari navbar menutupi konten) */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+}
+
+/* Custom scrollbar untuk browser berbasis WebKit (Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+    width: 8px;  /* Lebar scrollbar vertikal */
+}
+::-webkit-scrollbar-track {
+    background: #eef2ff;  /* Warna track/lintasan scrollbar */
+}
+::-webkit-scrollbar-thumb {
+    background: #2c54ff;  /* Warna thumb/gagang scrollbar */
+    border-radius: 20px;  /* Membuat thumb menjadi bulat */
+}
+
+/* ========== ANIMASI GLOBAL ========== */
+/* Animasi fade up - muncul dari bawah dengan transparan ke tampak */
+@keyframes fadeUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animasi glow pulse - efek cahaya berkedip pada teks */
+@keyframes glowPulse {
+    0% {
+        text-shadow: 0 0 0px rgba(44, 84, 255, 0.2);
+    }
+    100% {
+        text-shadow: 0 0 12px rgba(44, 84, 255, 0.6);
+    }
+}
+
+/* Animasi float - efek melayang naik turun */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-12px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* Animasi scale in - efek zoom masuk */
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.92);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Animasi slide in dari kiri */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Animasi slide in dari kanan */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Animasi pulse - efek membesar dan mengecil dengan bayangan */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px rgba(44, 84, 255, 0.5);
+    }
+}
+
+/* Kelas khusus untuk teks berwarna biru dengan font tebal */
+.blue-text {
+    color: #2c54ff;
+    font-weight: 700;
+    position: relative;
+}
+
+/* ========== HEADER & NAVBAR ========== */
+/* Header dengan efek blur transparan, sticky di atas, dan bayangan halus */
+header {
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(2px);  /* Efek blur latar belakang */
+    padding: 0 6%;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
+    position: sticky;
+    top: 0;
+    z-index: 1100;  /* Pastikan di atas konten lain */
+    transition: all 0.3s ease;
+}
+
+/* Navbar - flex antara logo dan menu navigasi */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    flex-wrap: wrap;  /* Membungkus saat layar kecil */
+}
+
+/* Logo container dengan gap antar elemen */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 800;
+    font-size: 1.3rem;
+    color: #0a2540;
+}
+
+/* Style gambar logo - ukuran tetap, border-radius, dengan efek hover */
+.logo img {
+    width: 86px;
+    height: 86px;
+    border-radius: 14px;
+    padding: 6px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover img {
+    transform: rotate(5deg) scale(1.02);  /* Efek miring sedikit saat hover */
+}
+
+/* Menu navigasi - flex horizontal dengan jarak */
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 28px;
+}
+
+/* Style link menu */
+nav ul li a {
+    text-decoration: none;
+    font-weight: 600;
+    color: #1f2a44;
+    transition: 0.25s;
+    font-size: 0.95rem;
+    letter-spacing: -0.2px;
+    position: relative;
+}
+
+/* Efek garis bawah pada link menu saat hover (animasi dari kiri ke kanan) */
+nav ul li a:after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 0%;
+    height: 2.5px;
+    background: #2c54ff;
+    border-radius: 4px;
+    transition: 0.3s ease;
+}
+
+nav ul li a:hover:after {
+    width: 100%;  /* Garis bawah memanjang penuh */
+}
+
+nav ul li a:hover {
+    color: #2c54ff;  /* Warna berubah jadi biru */
+}
+
+/* Menu icon untuk tampilan mobile (disembunyikan di desktop) */
+.menu-icon {
+    display: none;
+}
+
+.menu-icon i {
+    font-size: 26px;
+    cursor: pointer;
+    color: #2c54ff;
+}
+
+/* ========== HERO SECTION ========== */
+/* Hero section dengan gradien latar dan tinggi minimal */
+.hero {
+    background: linear-gradient(125deg, #f0f6ff 0%, #e9f0fe 100%);
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    padding: 2rem 8%;
+    gap: 50px;
+    flex-wrap: wrap;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efek lingkaran blur di background hero */
+.hero::before {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(44,84,255,0.08) 0%, rgba(44,84,255,0) 70%);
+    top: -80px;
+    right: -60px;
+    border-radius: 50%;
+    z-index: 0;
+}
+
+/* Konten hero (teks) - fleksibel dan animasi slide dari kiri */
+.hero-content {
+    flex: 1;
+    animation: slideInLeft 0.9s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
+    z-index: 2;
+}
+
+/* Teks selamat datang - seperti label/badge */
+.welcome-text {
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    background: rgba(44, 84, 255, 0.12);
+    display: inline-block;
+    padding: 5px 14px;
+    border-radius: 40px;
+    font-weight: 600;
+    color: #2c54ff;
+    margin-bottom: 20px;
+}
+
+/* Judul utama hero dengan gradien teks */
+.hero-content h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1.2;
+    background: linear-gradient(135deg, #0b2b5c, #2c54ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    margin-bottom: 24px;
+}
+
+/* Tombol primary (CTA) - dengan efek hover dan bayangan */
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #2c54ff;
+    color: white;
+    text-decoration: none;
+    border: none;
+    padding: 14px 32px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 18px rgba(44, 84, 255, 0.3);
+}
+
+.btn-primary:hover {
+    background: #1a3fd4;
+    transform: translateY(-4px);  /* Efek naik sedikit */
+    box-shadow: 0 18px 28px -8px rgba(44, 84, 255, 0.5);
+}
+
+/* Gambar hero - dengan animasi float melayang */
+.hero-image {
+    flex: 1;
+    text-align: center;
+    animation: float 5s ease-in-out infinite;
+}
+
+.hero-image img {
+    width: 100%;
+    max-width: 795px;
+    border-radius: 18%;
+    box-shadow: rgba(0,0,0,0.2);
+    background: white;
+    transition: transform 0.5s;
+}
+
+/* ========== INFO SECTION ========== */
+.info-section {
+    padding: 80px 6%;
+    background: #ffffff;
+}
+
+/* Container info - flex wrap */
+.info-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+
+/* Bagian intro teks */
+.info-intro {
+    flex: 1.2;
+    animation: slideInLeft 0.8s ease;
+}
+
+.info-intro h2 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.info-intro p {
+    color: #4b5563;
+    margin-bottom: 28px;
+    line-height: 1.5;
+    font-size: 1rem;
+}
+
+/* Tombol secondary - outline biru */
+.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: 2px solid #2c54ff;
+    color: #2c54ff;
+    padding: 12px 28px;
+    border-radius: 40px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.btn-secondary:hover {
+    background: #2c54ff;
+    color: white;
+    transform: scale(1.02);
+}
+
+/* Grid info card */
+.info-grid {
+    flex: 2;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 28px;
+}
+
+/* Style setiap info card */
+.info-card {
+    background: #fafcff;
+    border-radius: 28px;
+    padding: 24px 18px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(44,84,255,0.1);
+    box-shadow: 0 10px 20px -8px rgba(0,0,0,0.02);
+    animation: slideInRight 0.7s ease backwards;
+}
+
+/* Delay animasi untuk setiap card (efek berurutan) */
+.info-card:nth-child(1) { animation-delay: 0.1s; }
+.info-card:nth-child(2) { animation-delay: 0.2s; }
+.info-card:nth-child(3) { animation-delay: 0.3s; }
+.info-card:nth-child(4) { animation-delay: 0.4s; }
+.info-card:nth-child(5) { animation-delay: 0.5s; }
+.info-card:nth-child(6) { animation-delay: 0.6s; }
+
+/* Efek hover pada info card */
+.info-card:hover {
+    transform: translateY(-10px);
+    border-color: #2c54ff30;
+    box-shadow: 0 20px 30px -12px rgba(44,84,255,0.2);
+    background: white;
+}
+
+/* Icon pada info card dengan gradien warna */
+.info-card i {
+    font-size: 2.6rem;
+    background: linear-gradient(145deg, #2c54ff, #6d8aff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    margin-bottom: 18px;
+}
+
+.info-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.info-card p {
+    font-size: 0.85rem;
+    color: #5c6b7e;
+}
+
+/* ========== VIDEO SECTION ========== */
+/* Section video dengan overlay dan efek modern */
+.video-section {
+    background-blend-mode: overlay;
+    background-size: cover;
+    background-position: center 30%;
+    min-height: 460px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Overlay konten video */
+.video-overlay {
+    text-align: center;
+    z-index: 3;
+    padding: 2rem;
+    animation: scaleIn 0.9s;
+}
+
+/* Tombol play video dengan efek glassmorphism */
+.play-button {
+    width: 85px;
+    height: 85px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(6px);
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px;
+    cursor: pointer;
+    transition: 0.4s;
+    border: 1px solid rgba(255,255,255,0.4);
+    font-size: 2.6rem;
+    color: white;
+    position: relative;
+}
+
+.play-button:hover {
+    background: #2c54ff;
+    transform: scale(1.1);
+    box-shadow: 0 0 25px #2c54ffaa;
+    animation: pulse 0.6s ease-in-out;
+}
+
+/* Tooltip pada tombol play (muncul saat hover) */
+.play-tooltip {
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.play-button:hover .play-tooltip {
+    opacity: 1;
+}
+
+/* Judul video overlay */
+.video-overlay h2 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: white;
+    letter-spacing: -0.3px;
+}
+
+/* Teks highlight dengan efek gradien dan animasi glow */
+.highlight {
+    color: #dbe7f8;
+    background: linear-gradient(145deg, #09a4c7, #0a035a);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    font-weight: 800;
+    animation: glowPulse 1.5s ease-in-out infinite alternate;
+}
+
+/* Container video responsive dengan rasio 16:9 */
+.video-wrapper {
+    max-width: 1200px;
+    width: 90%;
+    margin: 25px auto 0;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    transition: all 0.4s ease;
+}
+
+/* Iframe video memenuhi container dengan rasio 16:9 */
+.video-wrapper iframe {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    display: block;
+    border: none;
+}
+
+/* Efek hover pada video wrapper */
+.video-wrapper:hover {
+    transform: scale(1.02);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+}
+
+/* Sembunyikan tombol play (karena video langsung ditampilkan) */
+.play-button {
+    display: none;
+}
+
+/* Video container selalu ditampilkan */
+.video-container {
+    display: block;
+}
+
+/* ========== PROGRAMS SECTION ========== */
+/* Section program dengan layout 4 card atas, 3 card bawah, center */
+.programs {
+    padding: 80px 6%;
+    text-align: center;
+    background: #f9fcff;
+}
+
+/* Judul section */
+.section-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 50px;
+    animation: fadeUp 0.8s ease;
+}
+
+/* Grid program - flex column agar bisa mengatur baris */
+.program-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 35px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Baris program - flex wrap dengan justify center */
+.program-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 35px;
+}
+
+/* Card program individual */
+.program-card {
+    background: white;
+    border-radius: 36px;
+    padding: 38px 20px;
+    transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    border: 1px solid #eef2ff;
+    position: relative;
+    overflow: hidden;
+    animation: fadeUp 0.8s ease backwards;
+    flex: 0 0 220px;
+    min-width: 200px;
+}
+
+/* 4 card di baris pertama dengan lebar tetap 220px */
+.program-row:first-child .program-card {
+    flex: 0 0 220px;
+}
+
+/* Baris kedua (3 card) di-center-kan */
+.program-row:last-child {
+    justify-content: center;
+}
+
+.program-row:last-child .program-card {
+    flex: 0 0 220px;
+}
+
+/* Delay animasi untuk setiap card agar muncul berurutan */
+.program-row:first-child .program-card:nth-child(1) { animation-delay: 0.1s; }
+.program-row:first-child .program-card:nth-child(2) { animation-delay: 0.2s; }
+.program-row:first-child .program-card:nth-child(3) { animation-delay: 0.3s; }
+.program-row:first-child .program-card:nth-child(4) { animation-delay: 0.4s; }
+.program-row:last-child .program-card:nth-child(1) { animation-delay: 0.5s; }
+.program-row:last-child .program-card:nth-child(2) { animation-delay: 0.6s; }
+.program-row:last-child .program-card:nth-child(3) { animation-delay: 0.7s; }
+
+/* Efek garis bawah gradien pada card (animasi dari kiri) */
+.program-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #2c54ff, #8aa9ff);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s;
+}
+
+.program-card:hover::after {
+    transform: scaleX(1);
+}
+
+/* Efek hover pada program card */
+.program-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 35px 45px -18px rgba(44, 84, 255, 0.3);
+    border-color: transparent;
+}
+
+/* Nomor/angka pada program card dengan gradien */
+.program-card h3 {
+    font-size: 1.9rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #1f2a66, #2c54ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    margin-bottom: 15px;
+}
+
+.program-card p {
+    color: #5d6e85;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+/* ========== CONTACT SECTION ========== */
+.contact-section {
+    padding: 80px 6%;
+    background: #f9fcff;
+}
+
+/* Container contact - flex wrap */
+.contact-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Informasi kontak (kiri) */
+.contact-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+/* Setiap item kontak (icon + teks) */
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+}
+
+/* Icon kontak dengan background transparan dan efek hover */
+.contact-item i {
+    font-size: 1.8rem;
+    color: #2c54ff;
+    background: rgba(44,84,255,0.1);
+    padding: 12px;
+    border-radius: 16px;
+    transition: 0.3s;
+}
+
+.contact-item:hover i {
+    background: #2c54ff;
+    color: white;
+    transform: scale(1.05);
+}
+
+.contact-item h3 {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    color: #1f2a44;
+}
+
+.contact-item p {
+    color: #5c6b7e;
+}
+
+/* Peta Google Maps (kanan) */
+.contact-map {
+    flex: 1;
+}
+
+.contact-map iframe {
+    width: 100%;
+    height: 280px;
+    border-radius: 24px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+
+/* ========== FOOTER ========== */
+.footer {
+    background: #0a1a2e;
+    padding: 35px 6%;
+    color: #b9c7d9;
+    text-align: center;
+    border-top: 1px solid #2c3f5f;
+}
+
+/* Icon media sosial */
+.social-icons {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+}
+
+.social-icons a {
+    color: #b9c7d9;
+    font-size: 1.4rem;
+    transition: 0.3s;
+    display: inline-block;
+}
+
+.social-icons a:hover {
+    color: #2c54ff;
+    transform: translateY(-5px);  /* Efek naik saat hover */
+}
+
+/* ========== RESPONSIVE DESIGN (MEDIA QUERIES) ========== */
+/* Untuk layar tablet dan laptop kecil (max 900px) */
+@media (max-width: 900px) {
+    /* Perkecil ukuran judul hero */
+    .hero-content h1 {
+        font-size: 2.4rem;
+    }
+    /* Kurangi padding navbar */
+    .navbar {
+        padding: 12px 0;
+    }
+    /* Sembunyikan menu navigasi desktop, tampilkan menu icon */
+    nav ul {
+        display: none;
+    }
+    .menu-icon {
+        display: block;
+    }
+    /* Info container jadi column */
+    .info-container {
+        flex-direction: column;
+    }
+    /* Hero jadi column dengan urutan terbalik (gambar di atas) */
+    .hero {
+        flex-direction: column-reverse;
+        text-align: center;
+        padding-top: 40px;
+    }
+    /* Perkecil judul video */
+    .video-overlay h2 {
+        font-size: 1.8rem;
+    }
+    /* Ubah animasi hero content jadi fadeUp */
+    .hero-content {
+        animation: fadeUp 0.9s ease;
+    }
+    .info-intro {
+        animation: fadeUp 0.8s ease;
+    }
+    /* Contact container jadi column */
+    .contact-container {
+        flex-direction: column;
+    }
+}
+
+/* Untuk layar mobile (max 600px) */
+@media (max-width: 600px) {
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+    .program-card h3 {
+        font-size: 1.6rem;
+    }
+    .section-title {
+        font-size: 1.8rem;
+    }
+    /* Sembunyikan tooltip play di mobile */
+    .play-tooltip {
+        display: none;
+    }
+}
+
+/* Responsive khusus untuk program grid */
+@media (max-width: 1000px) {
+    .program-row {
+        justify-content: center;
+    }
+    .program-card {
+        flex: 0 0 200px;
+        min-width: 180px;
+        padding: 30px 15px;
+    }
+    .program-card h3 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Responsive untuk program grid di mobile (max 700px) */
+@media (max-width: 700px) {
+    .program-row {
+        flex-direction: column;
+        align-items: center;
+    }
+    .program-card {
+        width: 280px;
+        flex: 0 0 auto;
+    }
+}
+
+/* Responsive untuk video wrapper di tablet */
+@media (max-width: 768px) {
+    .video-wrapper {
+        max-width: 90%;
+    }
+    .video-overlay h2 {
+        font-size: 1.8rem;
+    }
+}
+
+/* Responsive untuk video wrapper di mobile */
+@media (max-width: 480px) {
+    .video-wrapper {
+        max-width: 95%;
+    }
+    .video-overlay h2 {
+        font-size: 1.4rem;
+    }
+}
